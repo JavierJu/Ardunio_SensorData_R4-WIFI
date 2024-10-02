@@ -20,7 +20,7 @@ const char* serverIP = "35.213.49.212";
 const int serverPort = 80;
 
 unsigned long lastSendTime = 0;
-const unsigned long sendInterval = 60000;
+const unsigned long sendInterval = 3600000; // 1시간 (3,600,000 밀리초)// 1분 (60,000 밀리초)
 
 void setup() {
   Serial.begin(9600);
