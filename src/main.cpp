@@ -20,7 +20,7 @@ const char* serverIP = "35.213.49.212";
 const int serverPort = 80;
 
 unsigned long lastSendTime = 0;
-const unsigned long sendInterval = 1200000; // 1시간 (3,600,000 밀리초)// 1분 (60,000 밀리초) // 10분 (600,000 밀리초) 
+const unsigned long sendInterval = 600000; // 1시간 (3,600,000 밀리초)// 1분 (60,000 밀리초) // 10분 (600,000 밀리초) 
 
 void setup() {
   Serial.begin(9600);
@@ -44,40 +44,79 @@ void setup() {
 }
 
 void loop() {
-  float temperature, humidity;
-  uint16_t light, soil_moisture;
-
-  // 센서 데이터 읽기
-  readSensors(temperature, humidity, light, soil_moisture);
-
-  // OLED 디스플레이에 데이터 표시
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("Sensor Data");
-  display.setCursor(0, 10);
-  display.print("Temp: ");
-  display.print(temperature);
-  display.println(" C");
-  display.setCursor(0, 20);
-  display.print("Humi: ");
-  display.print(humidity);
-  display.println(" %");
-  display.setCursor(0, 30);
-  display.print("Light: ");
-  display.print(light);
-  display.println(" %");
-  display.setCursor(0, 40);
-  display.print("Soil Moist: ");
-  display.print(soil_moisture);
-  display.println(" %");
-  display.display();
-
-  // 데이터 전송
   unsigned long currentMillis = millis();
+    
   if (currentMillis - lastSendTime >= sendInterval) {
-    sendDataToServer(temperature, humidity, light, soil_moisture, serverIP, serverPort);
-    lastSendTime = currentMillis;
+      float temperature, humidity;
+      uint16_t light, soil_moisture;
+
+      // 센서 데이터 읽기
+      readSensors(temperature, humidity, light, soil_moisture);
+
+      // OLED 디스플레이에 데이터 표시
+      display.clearDisplay();
+      display.setCursor(0, 0);
+      display.println("Sensor Data");
+      display.setCursor(0, 10);
+      display.print("Temp: ");
+      display.print(temperature);
+      display.println(" C");
+      display.setCursor(0, 20);
+      display.print("Humi: ");
+      display.print(humidity);
+      display.println(" %");
+      display.setCursor(0, 30);
+      display.print("Light: ");
+      display.print(light);
+      display.println(" %");
+      display.setCursor(0, 40);
+      display.print("Soil Moist: ");
+      display.print(soil_moisture);
+      display.println(" %");
+      display.display();
+
+      // 데이터 전송
+      sendDataToServer(temperature, humidity, light, soil_moisture, serverIP, serverPort);
+
+      // 마지막 전송 시간 갱신
+      lastSendTime = currentMillis;
   }
 
-  delay(2000);
+  delay(1000);
+
+  // float temperature, humidity;
+  // uint16_t light, soil_moisture;
+
+  // // 센서 데이터 읽기
+  // readSensors(temperature, humidity, light, soil_moisture);
+
+  // // OLED 디스플레이에 데이터 표시
+  // display.clearDisplay();
+  // display.setCursor(0, 0);
+  // display.println("Sensor Data");
+  // display.setCursor(0, 10);
+  // display.print("Temp: ");
+  // display.print(temperature);
+  // display.println(" C");
+  // display.setCursor(0, 20);
+  // display.print("Humi: ");
+  // display.print(humidity);
+  // display.println(" %");
+  // display.setCursor(0, 30);
+  // display.print("Light: ");
+  // display.print(light);
+  // display.println(" %");
+  // display.setCursor(0, 40);
+  // display.print("Soil Moist: ");
+  // display.print(soil_moisture);
+  // display.println(" %");
+  // display.display();
+  
+  // // 데이터 전송
+  // unsigned long currentMillis = millis();
+  // if (currentMillis - lastSendTime >= sendInterval) {
+  //   sendDataToServer(temperature, humidity, light, soil_moisture, serverIP, serverPort);
+  //   lastSendTime = currentMillis;
+  // }
+  // delay(1000); 
 }
