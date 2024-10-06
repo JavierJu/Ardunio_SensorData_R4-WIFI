@@ -20,5 +20,5 @@ void readSensors(float &temperature, float &humidity, uint16_t &light, uint16_t 
 
   // 센서 데이터 변환
   light = map(lightLevel, 0, 1023, 100, 0);
-  soil_moisture = map(soilMoistureLevel, 524, 233, 0, 100);
+  soil_moisture = map(soilMoistureLevel, 535, 230, 0, 100);
 }
