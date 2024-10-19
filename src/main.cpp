@@ -57,6 +57,8 @@ void loop() {
   // 센서 데이터 읽기
   readSensors(temperature, humidity, light, soil_moisture);
 
+  
+
   // OLED 디스플레이에 데이터 표시
   display.clearDisplay();
   display.setCursor(0, 0);
