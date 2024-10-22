@@ -16,7 +16,7 @@ const char* ssid = "TP-Link_C6A8_JU";
 const char* password = "Javierju12";
 
 // 서버 정보
-const char* serverIP = "35.213.49.212";
+const char* serverIP = "13.208.254.200";
 const int serverPort = 80;
 
 // 릴레이 핀 설정 (핀 5)
@@ -46,8 +46,8 @@ void setup() {
   connectToWiFi(ssid, password);
 
   // 릴레이 핀을 출력으로 설정
-  pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, HIGH); // 릴레이 초기값을 OFF 상태로 설정
+  // pinMode(relayPin, OUTPUT);
+  // digitalWrite(relayPin, HIGH); // 릴레이 초기값을 OFF 상태로 설정
 }
 
 void loop() {
@@ -82,13 +82,13 @@ void loop() {
   display.display();
   
   // 릴레이 제어: 토양 수분이 30% 이하이면 릴레이 ON (수중 모터 작동)
-  if (soil_moisture < 30) {
-    digitalWrite(relayPin, LOW); // 릴레이 ON
-    Serial.println("Relay ON (Water pump activated)");
-  } else {
-    digitalWrite(relayPin, HIGH); // 릴레이 OFF
-    // Serial.println("Relay OFF");
-  }
+  // if (soil_moisture < 30) {
+  //   digitalWrite(relayPin, LOW); // 릴레이 ON
+  //   Serial.println("Relay ON (Water pump activated)");
+  // } else {
+  //   digitalWrite(relayPin, HIGH); // 릴레이 OFF
+  //   // Serial.println("Relay OFF");
+  // }
 
   // 데이터 전송
   unsigned long currentMillis = millis();

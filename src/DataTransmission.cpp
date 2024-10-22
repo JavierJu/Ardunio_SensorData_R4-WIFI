@@ -11,7 +11,7 @@ void sendDataToServer(float temperature, float humidity, uint16_t light, uint16_
                            + "&light=" + String(light)
                            + "&soil_moisture=" + String(soil_moisture);
     
-    client.println("POST /SmartFarm_test/server/process_R4.php HTTP/1.1");
+    client.println("POST /SmartFarm/server/process_R4.php HTTP/1.1");
     client.print("Host: "); client.println(serverIP);
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.print("Content-Length: "); client.println(httpRequestData.length());
